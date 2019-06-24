@@ -42,187 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807891.2455471"
+            timestampString = "583091399.808248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "mergeAudio(withVideoURL:success:failure:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VideoFromImages.VideoWriter.(mergeAudio in _C3579DAE2B78287403315D04B3D0F257)(withVideoURL: Foundation.URL, success: (Foundation.URL) -&gt; (), failure: (Swift.Error) -&gt; ()) -&gt; ()"
-                  moduleName = "VideoFromImages"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Work/Prakash/Personal/VideoFromImages/VideoFromImages/Classes/Model/VideoWriter.swift"
-                  timestampString = "580807891.48862"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "182"
-                  endingLineNumber = "182"
-                  offsetFromSymbolStart = "612">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VideoFromImages.VideoWriter.(mergeAudio in _C3579DAE2B78287403315D04B3D0F257)(withVideoURL: Foundation.URL, success: (Foundation.URL) -&gt; (), failure: (Swift.Error) -&gt; ()) -&gt; ()"
-                  moduleName = "VideoFromImages"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Work/Prakash/Personal/VideoFromImages/VideoFromImages/Classes/Model/VideoWriter.swift"
-                  timestampString = "580807891.491437"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "727">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807891.245989"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "render(videoOutputURL:appendPixelBuffers:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in VideoFromImages.VideoWriter.render(videoOutputURL: Foundation.URL, appendPixelBuffers: (VideoFromImages.VideoWriter) -&gt; Swift.Bool, completion: () -&gt; ()) -&gt; ()"
-                  moduleName = "VideoFromImages"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Work/Prakash/Personal/VideoFromImages/VideoFromImages/Classes/Model/VideoWriter.swift"
-                  timestampString = "580807891.498638"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "143"
-                  endingLineNumber = "143"
-                  offsetFromSymbolStart = "169">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.URL) -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in VideoFromImages.VideoWriter.render(videoOutputURL: Foundation.URL, appendPixelBuffers: (VideoFromImages.VideoWriter) -&gt; Swift.Bool, completion: () -&gt; ()) -&gt; ()"
-                  moduleName = "VideoFromImages"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Work/Prakash/Personal/VideoFromImages/VideoFromImages/Classes/Model/VideoWriter.swift"
-                  timestampString = "580807891.504636"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "144"
-                  endingLineNumber = "144"
-                  offsetFromSymbolStart = "173">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807891.246309"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "render(videoOutputURL:appendPixelBuffers:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in VideoFromImages.VideoWriter.render(videoOutputURL: Foundation.URL, appendPixelBuffers: (VideoFromImages.VideoWriter) -&gt; Swift.Bool, completion: () -&gt; ()) -&gt; ()"
-                  moduleName = "VideoFromImages"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Work/Prakash/Personal/VideoFromImages/VideoFromImages/Classes/Model/VideoWriter.swift"
-                  timestampString = "580807891.512642"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "141"
-                  endingLineNumber = "141"
-                  offsetFromSymbolStart = "343">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in VideoFromImages.VideoWriter.render(videoOutputURL: Foundation.URL, appendPixelBuffers: (VideoFromImages.VideoWriter) -&gt; Swift.Bool, completion: () -&gt; ()) -&gt; ()"
-                  moduleName = "VideoFromImages"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Work/Prakash/Personal/VideoFromImages/VideoFromImages/Classes/Model/VideoWriter.swift"
-                  timestampString = "580807891.515007"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
-                  offsetFromSymbolStart = "42">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807936.201919"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "render(videoOutputURL:appendPixelBuffers:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807938.371716"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "render(videoOutputURL:appendPixelBuffers:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807961.185816"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "mergeAudio(withVideoURL:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807962.9937021"
+            timestampString = "583091399.808321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "mergeAudio(withVideoURL:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807968.690117"
+            timestampString = "583091399.808378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "mergeAudio(withVideoURL:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807970.113179"
+            timestampString = "583091399.8084331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "mergeAudio(withVideoURL:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580807978.401189"
+            timestampString = "583091399.808484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "mergeAudio(withVideoURL:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,12 +122,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
-            timestampString = "580808143.066551"
+            timestampString = "583091399.808533"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "mergeAudio(withVideoURL:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
+            timestampString = "583091399.808584"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "mergeAudio(withVideoURL:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
+            timestampString = "583091399.808632"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "mergeAudio(withVideoURL:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
+            timestampString = "583091399.808681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "mergeAudio(withVideoURL:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
+            timestampString = "583091399.808737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "mergeAudio(withVideoURL:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
+            timestampString = "583091399.808784"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "mergeAudio(withVideoURL:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoFromImages/Classes/Model/VideoWriter.swift"
+            timestampString = "583091399.808831"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "addAudioInVideo(videoUrl:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

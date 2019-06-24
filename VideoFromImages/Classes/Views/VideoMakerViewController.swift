@@ -15,7 +15,10 @@ import AVFoundation
 var tempurl=""
 
 class VideoMakerViewController: UIViewController {
+    var audioPlayer: AVAudioPlayer?
+
     @IBOutlet weak var textView: UITextView!
+    var player : AVPlayer!
     var textForTextView =   ""
     var images:[UIImage]=[]
     @IBOutlet weak var videoview: UIView!
@@ -45,12 +48,21 @@ class VideoMakerViewController: UIViewController {
             }
         }
     }
+    private func setupAVPlayer() {
+        player.addObserver(self, forKeyPath: "status", options: [.old, .new], context: nil)
+        if #available(iOS 10.0, *) {
+            player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+        } else {
+            player.addObserver(self, forKeyPath: "rate", options: [.old, .new], context: nil)
+        }
+    }
     
     func displayVideo()
     {
         
         let u:String=tempurl
-        let player = AVPlayer(url: URL(fileURLWithPath: u))
+        player = AVPlayer(url: URL(fileURLWithPath: u))
+        setupAVPlayer()
         let playerController = AVPlayerViewController()
         playerController.player = player
         self.addChild(playerController)
@@ -61,6 +73,55 @@ class VideoMakerViewController: UIViewController {
         videoview.backgroundColor=UIColor.clear
         player.play()
         self.updateTextView(text: "Video display done")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        let audioFromBundle =   Bundle.main.url(forResource: "music1", withExtension: ".mp3")
+        if object as AnyObject? === player {
+            if keyPath == "status" {
+//                if player.status == .readyToPlay {
+//                    player.play()
+//                }
+            } else if keyPath == "timeControlStatus" {
+                if #available(iOS 10.0, *) {
+                    if player.timeControlStatus == .playing {
+                        
+                        self.playAudio(audioURL: audioFromBundle!)
+
+                    } else {
+                        self.stopAudio()
+                    }
+                }
+            } else if keyPath == "rate" {
+                if player.rate > 0 {
+                    self.playAudio(audioURL: audioFromBundle!)
+                } else {
+                    self.stopAudio()
+                }
+            }
+        }
+    }
+    
+    func playAudio(audioURL : URL){
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            
+            // For iOS versions < 11
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            guard let aPlayer = audioPlayer else { return }
+            aPlayer.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func stopAudio(){
+        guard let aPlayer = audioPlayer else { return }
+        aPlayer.stop()
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
