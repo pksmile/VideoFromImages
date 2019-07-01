@@ -20,7 +20,7 @@ class VideoMakerViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     var player : AVPlayer!
     var textForTextView =   ""
-    var images:[UIImage]=[]
+    var imagesAndVideos:[PHAsset]=[]
     @IBOutlet weak var videoview: UIView!
     func printTimestamp()->String {
         return DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .full)
@@ -31,23 +31,142 @@ class VideoMakerViewController: UIViewController {
         self.textView.text  =   textForTextView
     }
     
+    func createNewArray(assets : [PHAsset])->[PHAsset]{
+        return assets
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateTextView(text: "Started Updating images")
-        DispatchQueue.main.async {
-            let settings = RenderSettings()
-            self.updateTextView(text: "Started Image Animator")
-            //replace this audio from bundle to code where you can pass the exact selected audio url
-            let audioFromBundle =   Bundle.main.url(forResource: "music1", withExtension: ".mp3")
-            print("check for audio from url:- \(audioFromBundle)")
-            let imageAnimator = ImageAnimator(renderSettings: settings,imagearr: self.images, audioURL: audioFromBundle!)
-            self.updateTextView(text: "Image Animator finishe, video create started")
-            imageAnimator.render() {
-                self.updateTextView(text: "Video created")
-                self.displayVideo()
+        firstForLoop()
+    }
+    
+    
+    func firstForLoop(){
+        let audioFromBundle =   Bundle.main.url(forResource: "music1", withExtension: ".mp3")
+        //array of counter means, if image starts from array of point 0 and ends at 3, the video starts from 4 and ends at 6
+        var arrayImagesVideos :   [[PHAsset]]   =   []
+        
+        var count   =   0
+        var tempArray   :   [PHAsset]   =   []
+        for asset in imagesAndVideos {
+            
+            if count    ==  0{
+                tempArray.append(asset)
+                if count    ==  imagesAndVideos.count - 1{
+                    arrayImagesVideos.append(tempArray)
+                }
+            }else{
+                tempArray.append(asset)
+                if imagesAndVideos[count].mediaType ==  imagesAndVideos[count - 1].mediaType{
+                    
+                    if count    ==  imagesAndVideos.count - 1{
+                        arrayImagesVideos.append(tempArray)
+                    }
+                }else{
+                    arrayImagesVideos.append(tempArray)
+                    tempArray.removeAll()
+                }
             }
+            count   +=  1
+        }
+        
+        print("check for video and image asset:- \(arrayImagesVideos)")
+        
+        var processedVideoURL   :   [URL]   =   []
+        var countAssets = 0
+        for assets in arrayImagesVideos {
+            
+            if assets.first?.mediaType  ==  PHAssetMediaType.video{
+                var videoURLs : [URL] = []
+                for asset in assets{
+                    self.getURL(ofVideoWith: asset) { (url) in
+                        videoURLs.append(url!)
+                    }
+                }
+                
+                GenerateVideoAudioFromImages.mergeVideosInSignleVideo(videoURLs: videoURLs, andFileName: "test\(countAssets).mp4", success: { (url) in
+                    processedVideoURL.append(url)
+                    if countAssets  ==  arrayImagesVideos.count - 1{
+                        self.mergeAllVideos(videoURLs: processedVideoURL)
+                    }
+                    countAssets   +=  1
+                    
+                }) { (error) in
+                    countAssets   +=  1
+                    print("error block should not called in any case")
+                    
+                }
+            }else{
+                var imagesArray : [UIImage] =   []
+                for asset in assets{
+                    imagesArray.append(self.getUIImage(asset: asset)!)
+                }
+                
+                GenerateVideoAudioFromImages.shared.generateVideoFromImages(_images: imagesArray, andAudios: [audioFromBundle!], andType: GenerateVideoAudioFromImages.GenerateVideoAudioType.singleAudioMultipleImage, { (progress) in
+                    print("progress from it:- \(progress)")
+                }, success: { (url) in
+                    print("video done- \(url)")
+                    processedVideoURL.append(url)
+                    if countAssets  ==  arrayImagesVideos.count - 1{
+                        self.mergeAllVideos(videoURLs: processedVideoURL)
+                    }
+                    countAssets   +=  1
+                }) { (error) in
+                    print("error done- \(error)")
+                    countAssets   +=  1
+                    
+                }
+                
+            }
+            
+            
         }
     }
+    
+    
+    func mergeAllVideos(videoURLs : [URL]){
+        GenerateVideoAudioFromImages.mergeVideosInSignleVideo(videoURLs: videoURLs, andFileName: "FinalVideo.mp4", success: { (url) in
+            print("check for success url:- \(url)")
+            self.displayVideo(url: url)
+        }) { (error) in
+            print("error block should not called in any case")
+        }
+    }
+
+
+    
+    //running this code for video only
+    func getURL(ofVideoWith mPhasset: PHAsset, completionHandler : @escaping ((_ responseURL : URL?) -> Void)) {
+        let options: PHVideoRequestOptions = PHVideoRequestOptions()
+        options.version = .original
+        PHImageManager.default().requestAVAsset(forVideo: mPhasset, options: options, resultHandler: { (asset, audioMix, info) in
+            if let urlAsset = asset as? AVURLAsset {
+                let localVideoUrl = urlAsset.url
+                completionHandler(localVideoUrl)
+            } else {
+                completionHandler(nil)
+            }
+        })
+    }
+        
+    
+    func getUIImage(asset: PHAsset) -> UIImage? {
+        var img: UIImage?
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.version = .original
+        options.isSynchronous = true
+        manager.requestImageData(for: asset, options: options) { data, _, _, _ in
+            
+            if let data = data {
+                img = UIImage(data: data)
+            }
+        }
+        return img
+    }
+    
+    
     private func setupAVPlayer() {
         player.addObserver(self, forKeyPath: "status", options: [.old, .new], context: nil)
         if #available(iOS 10.0, *) {
@@ -57,12 +176,13 @@ class VideoMakerViewController: UIViewController {
         }
     }
     
-    func displayVideo()
+    func displayVideo(url : URL)
     {
         
-        let u:String=tempurl
-        player = AVPlayer(url: URL(fileURLWithPath: u))
-        setupAVPlayer()
+//        let u:String=tempurl
+//        print("check the video url:- \(u)")
+        player = AVPlayer(url: url)
+//        setupAVPlayer()
         let playerController = AVPlayerViewController()
         playerController.player = player
         self.addChild(playerController)
@@ -103,6 +223,7 @@ class VideoMakerViewController: UIViewController {
     }
     
     func playAudio(audioURL : URL){
+//        return
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -110,9 +231,9 @@ class VideoMakerViewController: UIViewController {
             
             // For iOS versions < 11
             audioPlayer = try AVAudioPlayer(contentsOf: audioURL, fileTypeHint: AVFileType.mp3.rawValue)
-            
-            guard let aPlayer = audioPlayer else { return }
-            aPlayer.play()
+            audioPlayer?.play()
+//            guard let aPlayer = audioPlayer else { return }
+//            aPlayer.play()
             
         } catch let error {
             print(error.localizedDescription)
@@ -141,3 +262,4 @@ class VideoMakerViewController: UIViewController {
     
     
 }
+

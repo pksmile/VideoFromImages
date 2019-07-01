@@ -144,8 +144,7 @@ class VideoWriter {
 //                            completion()
 //                        }
                         
-
-                        self.mergeFilesWithUrl(videoUrl: videoOutputURL, success: { (videoURL) in
+                        self.mergeAudio(withVideoURL: videoOutputURL, success: { (videoURL) in
                             print("finished")
                             DispatchQueue.main.async {
                                 completion()
@@ -196,125 +195,21 @@ class VideoWriter {
  
     
     
+    
+    
+    
+    
+    
+    
     // MARK: --------------------------------------------------------------- Private methods ---------------------------------------------------------------
     
     /// Private method to generate a movie with the selected frame and the given audio
     ///
     /// - parameter audioUrl: the audio url
     /// - parameter videoUrl: the video url
-    func mergeFilesWithUrl(videoUrl: URL, success: @escaping ((URL) -> Void), failure: @escaping ((Error) -> Void)) {
-    
-        let mixComposition: AVMutableComposition = AVMutableComposition()
-        var mutableCompositionVideoTrack: [AVMutableCompositionTrack] = []
-        var mutableCompositionAudioTrack: [AVMutableCompositionTrack] = []
-        let totalVideoCompositionInstruction : AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
-        
-        let aVideoAsset: AVAsset = AVAsset(url: videoUrl)
-        let aAudioAsset: AVAsset = AVAsset(url: audioURLs.last!)
-        
-        if let videoTrack = mixComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid), let audioTrack = mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid) {
-            mutableCompositionVideoTrack.append(videoTrack)
-            mutableCompositionAudioTrack.append(audioTrack)
-            
-            if let aVideoAssetTrack: AVAssetTrack = aVideoAsset.tracks(withMediaType: .video).first, let aAudioAssetTrack: AVAssetTrack = aAudioAsset.tracks(withMediaType: .audio).first {
-                do {
-                    try mutableCompositionVideoTrack.first?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration), of: aVideoAssetTrack, at: CMTime.zero)
-                    try mutableCompositionAudioTrack.first?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: CMTime.zero)
-                    videoTrack.preferredTransform = aVideoAssetTrack.preferredTransform
-                    
-                } catch{
-                    print(error)
-                }
-                
-                
-                totalVideoCompositionInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero,duration: aVideoAssetTrack.timeRange.duration)
-            }
-        }
-        
-        let mutableVideoComposition: AVMutableVideoComposition = AVMutableVideoComposition()
-        mutableVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
-        mutableVideoComposition.renderSize = CGSize(width: 480, height: 640)
-        
-        if let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
-            let outputURL = URL(fileURLWithPath: documentsPath).appendingPathComponent("\("fileName").m4v")
-            
-            do {
-                if FileManager.default.fileExists(atPath: outputURL.path) {
-                    
-                    try FileManager.default.removeItem(at: outputURL)
-                }
-            } catch { }
-            
-            if let exportSession = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) {
-                exportSession.outputURL = outputURL
-                exportSession.outputFileType = AVFileType.mp4
-                exportSession.shouldOptimizeForNetworkUse = true
-                
-                /// try to export the file and handle the status cases
-                exportSession.exportAsynchronously(completionHandler: {
-                    switch exportSession.status {
-                    case .failed:
-                        if let _error = exportSession.error {
-                            failure(_error)
-                        }
-                        
-                    case .cancelled:
-                        if let _error = exportSession.error {
-                            failure(_error)
-                        }
-                        
-                    default:
-                        print("finished")
-                        success(outputURL)
-                    }
-                })
-            } else {
-                let error : Error   =   Error.self as! Error
-                failure(error)
-            }
-        }
-
-        
-        
-    }
-    
-    
-    
-    func addAudioInVideo(videoUrl: URL, success: @escaping ((URL) -> Void), failure: @escaping ((Error) -> Void)) {
-        do {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-                
-            let outputVideoFileURL = URL(fileURLWithPath: documentsPath!).appendingPathComponent("\(self.fileName ?? "").m4v")
-
-            let composition = AVMutableComposition()
-            let videoAsset = AVURLAsset(url: videoUrl, options: nil)
-            let audioAsset = AVURLAsset(url: audioURLs.last!)
-            guard let videoAssetTrack = videoAsset.tracks(withMediaType: AVMediaType.video).first else { throw NSError(domain: "error", code: 1, userInfo: ["error": "video type track"]) }
-            let compositionVideoTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)
-            try compositionVideoTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: videoAsset.duration), of: videoAssetTrack, at: CMTime.zero)
-            
-            let audioStartTime = CMTime.zero
-            guard let audioAssetTrack = audioAsset.tracks(withMediaType: AVMediaType.audio).first else { throw NSError(domain: "error", code: 1, userInfo: ["error": "mediatypaaudop"]) }
-            let compositionAudioTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)
-            try compositionAudioTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: audioAsset.duration), of: audioAssetTrack, at: audioStartTime)
-            guard let assetExport = AVAssetExportSession(asset: composition, presetName: "test") else { throw NSError(domain: "error", code: 1, userInfo: ["error": "mediatypaaudop"]) }
-            assetExport.outputFileType = AVFileType.mov
-            assetExport.outputURL = outputVideoFileURL
-            
-            assetExport.exportAsynchronously {
-                success(outputVideoFileURL)
-            }
-        } catch {
-            failure(error)
-        }
-    }
-    
-    
-    
-    
     private func mergeAudio(withVideoURL videoUrl: URL, success: @escaping ((URL) -> Void), failure: @escaping ((Error) -> Void)) {
         let dispatchQueueMerge = DispatchQueue(label: "merge audio", qos: .background)
-//        dispatchQueueMerge.async { [weak self] in
+        dispatchQueueMerge.async { [weak self] in
             /// create a mutable composition
             let mixComposition = AVMutableComposition()
             
@@ -333,19 +228,22 @@ class VideoWriter {
                     failure(error)
                 }
                 
-                var duration = CMTime(seconds: 10, preferredTimescale: 1)
+                var duration = CMTime(seconds: 0, preferredTimescale: 1)
                 
                 /// add an audio track to the composition
                 let audioCompositon = mixComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
-                
+                let audioFromBundle =   Bundle.main.url(forResource: "music1", withExtension: ".mp3")
+                var audios : [URL]  =   []
+                audios.append(audioFromBundle!)
+//                self?.audioURLs.append(audioFromBundle!)
                 /// for all audio files add the audio track and duration to the existing audio composition
-                for (index, audioUrl) in self.audioURLs.enumerated() {//}?? [].enumerated() {
-                    let audioDuration = CMTime(seconds: 10, preferredTimescale: 1)//self.audioDurations[index] ?? 0.0
+                for (index, audioUrl) in audios.enumerated() ?? [].enumerated() {
+                    let audioDuration = CMTime(seconds: self?.audioDurations[index] ?? 0.0, preferredTimescale: 1)
                     
                     let audioAsset = AVURLAsset(url: audioUrl)
-                    let audioTimeRange = CMTimeRange(start: CMTime.zero, duration: self.maxVideoLengthInSeconds != nil ? audioDuration : audioAsset.duration)
+                    let audioTimeRange = CMTimeRange(start: CMTime.zero, duration: self?.maxVideoLengthInSeconds != nil ? audioDuration : audioAsset.duration)
                     
-                    let shouldAddAudioTrack = self.maxVideoLengthInSeconds != nil ? audioDuration.seconds > 0 : true
+                    let shouldAddAudioTrack = self?.maxVideoLengthInSeconds != nil ? audioDuration.seconds > 0 : true
                     
                     if shouldAddAudioTrack {
                         if let audioTrack = audioAsset.tracks(withMediaType: .audio).first {
@@ -357,21 +255,35 @@ class VideoWriter {
                         }
                     }
                     
-                    duration = duration + (self.maxVideoLengthInSeconds != nil ? audioDuration : audioAsset.duration)
+                    duration = duration + (self?.maxVideoLengthInSeconds != nil ? audioDuration : audioAsset.duration)
                 }
                 
+                
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+                let videoOutputURL = URL(fileURLWithPath: documentsPath).appendingPathComponent("Prakash.m4v")
+//                tempurl =   videoOutputURL.absoluteString
+                tempurl =   videoOutputURL.absoluteString
+//                print("ourput url:- \(tempurl)")
+//                print("video output url:- \(videoOutputURL)")
+//                success(videoOutputURL)
+//
+
+//                success(videoOutputURL)
                 /// check if the documents folder is available
                 if let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
-                    self.getTempVideoFileUrl { (_) in }
-                    
+                    self?.getTempVideoFileUrl { (_) in }
+
                     /// create a path to the video file
-                    let videoOutputURL = URL(fileURLWithPath: documentsPath).appendingPathComponent("\(self.fileName ?? "").m4v")
-                    self.deleteFile(pathURL: videoOutputURL) {
+                    let videoOutputURL = URL(fileURLWithPath: documentsPath).appendingPathComponent("\(self?.fileName ?? "").m4v")
+//                    self?.deleteFile(pathURL: videoOutputURL, completion: {
+//                        
+//                    })
+                    self?.deleteFile(pathURL: videoOutputURL) {
                         if let exportSession = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) {
                             exportSession.outputURL = videoOutputURL
                             exportSession.outputFileType = AVFileType.mp4
                             exportSession.shouldOptimizeForNetworkUse = true
-                            
+
                             /// try to export the file and handle the status cases
                             exportSession.exportAsynchronously(completionHandler: {
                                 if exportSession.status == .failed || exportSession.status == .cancelled {
@@ -402,8 +314,19 @@ class VideoWriter {
                     failure(VideoGeneratorError(error: .kFailedToReadVideoTrack))
                 }
             }
-//        }
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /// Private method to delete the temp video file
     ///
     /// - Returns: the temp file url

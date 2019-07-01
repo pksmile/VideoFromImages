@@ -17,6 +17,7 @@ class ImageAnimator{
     let videoWriter: VideoWriter
     var images: [UIImage]!
     
+    
     var frameNum = 0
     
     class func removeFileAtURL(fileURL: NSURL) {
@@ -42,7 +43,7 @@ class ImageAnimator{
         videoWriter.start()
         let s:URL=self.settings.outputURL.absoluteURL!
         videoWriter.render(videoOutputURL: s, appendPixelBuffers: appendPixelBuffers(writer:)) {
-            tempurl=s.path
+//            tempurl=s.path
             completion()
         }
 //        videoWriter.render(videoOutputURL: s, appendPixelBuffers: appendPixelBuffers, completion: {

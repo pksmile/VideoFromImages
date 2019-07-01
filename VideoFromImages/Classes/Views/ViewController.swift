@@ -12,26 +12,26 @@ import Photos
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var imagesToPass  :   [UIImage]   =   []
+    var imagesAndVideosToPass  :   [PHAsset]   =   []
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view. 
         self.collectionView.register(UINib(nibName: "ImageToPassCell", bundle: nil), forCellWithReuseIdentifier: "CollecionCell")
     }
-
+    
     @IBAction func actionAddImages(_ sender: Any) {
         let imagePicker = OpalImagePickerController()
         presentOpalImagePickerController(imagePicker, animated: true,
                                          select: { (assets) in
                                             print("done clicked")
                                             self.dismiss(animated: true, completion: nil)
-                                            var images :    [UIImage] =   []
-                                            for asset in assets{
-                                                images.append(self.getUIImage(asset: asset) ?? UIImage())
-                                            }
+//                                            var images :    [UIImage] =   []
+//                                            for asset in assets{
+//                                                images.append(self.getUIImage(asset: asset) ?? UIImage())
+//                                            }
                                             
-                                     self.openNextView(images: images)
+                                     self.openNextView(imagesAndVideos: assets)
                                             //Select Assets
                                             
                                             
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func actionCreateVideo(_ sender: Any) {
-        if self.imagesToPass.count  >   0{
+        if self.imagesAndVideosToPass.count  >   0{
             self.performSegue(withIdentifier: "segueCreateVideo", sender: self)
         }else{
             self.showAlert(title: "Can not create video!", message: "please select at least one image from Top Right + button.")
@@ -52,7 +52,6 @@ class ViewController: UIViewController {
     
     
     func getUIImage(asset: PHAsset) -> UIImage? {
-        
         var img: UIImage?
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
@@ -67,9 +66,9 @@ class ViewController: UIViewController {
         return img
     }
     
-    func openNextView(images    :   [UIImage]){
+    func openNextView(imagesAndVideos    :   [PHAsset]){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.imagesToPass   =   images
+            self.imagesAndVideosToPass   =   imagesAndVideos
             self.collectionView.reloadData()
 //
         }
@@ -78,7 +77,7 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ==  "segueCreateVideo"{
             let destination =   segue.destination   as! VideoMakerViewController
-            destination.images  =   self.imagesToPass
+            destination.imagesAndVideos  =   self.imagesAndVideosToPass
         }
     }
     
@@ -92,13 +91,13 @@ extension ViewController    :   UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesToPass.count
+        return imagesAndVideosToPass.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell    =   collectionView.dequeueReusableCell(withReuseIdentifier: "CollecionCell", for: indexPath) as! ImageToPassCell
-        let image   :   UIImage   =   self.imagesToPass[indexPath.item]
-        cell.imageView.image    =   image
+        let image   :   PHAsset   =   self.imagesAndVideosToPass[indexPath.item]
+        cell.imageView.image    =   self.getUIImage(asset: image)
         return cell
     }
     

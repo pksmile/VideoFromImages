@@ -32,6 +32,8 @@
 		8458A441229C31B2002904C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458A42C229C31B2002904C6 /* AppDelegate.swift */; };
 		8458A442229C31B2002904C6 /* ImageToPassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458A42D229C31B2002904C6 /* ImageToPassCell.xib */; };
 		8458A447229C422E002904C6 /* music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8458A445229C422E002904C6 /* music1.mp3 */; };
+		8489DFAA22C9988100591405 /* GenerateVideoAudioFromImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489DFA922C9988100591405 /* GenerateVideoAudioFromImages.swift */; };
+		84B72B3022C8BA150030BF1D /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B72B2F22C8BA150030BF1D /* ImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		8458A42C229C31B2002904C6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8458A42D229C31B2002904C6 /* ImageToPassCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageToPassCell.xib; sourceTree = "<group>"; };
 		8458A445229C422E002904C6 /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music1.mp3; sourceTree = "<group>"; };
+		8489DFA922C9988100591405 /* GenerateVideoAudioFromImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateVideoAudioFromImages.swift; sourceTree = "<group>"; };
+		84B72B2F22C8BA150030BF1D /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 				8458A416229C31B2002904C6 /* RenderSettings.swift */,
 				8458A417229C31B2002904C6 /* VideoWriter.swift */,
 				8458A418229C31B2002904C6 /* VideoGeneratorError.swift */,
+				84B72B2F22C8BA150030BF1D /* ImageExtension.swift */,
+				8489DFA922C9988100591405 /* GenerateVideoAudioFromImages.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 			files = (
 				8458A432229C31B2002904C6 /* ImageAnimator.swift in Sources */,
 				8458A436229C31B2002904C6 /* OpalImagePickerConfiguration.swift in Sources */,
+				84B72B3022C8BA150030BF1D /* ImageExtension.swift in Sources */,
 				8458A431229C31B2002904C6 /* ViewControllerExtension.swift in Sources */,
 				8458A43A229C31B2002904C6 /* TimeInterval+String.swift in Sources */,
 				8458A43B229C31B2002904C6 /* OpalImagePickerCollectionViewLayout.swift in Sources */,
@@ -386,6 +393,7 @@
 				8458A435229C31B2002904C6 /* OpalImagePickerController.swift in Sources */,
 				8458A439229C31B2002904C6 /* UIViewController+OpalImagePicker.swift in Sources */,
 				8458A430229C31B2002904C6 /* VideoGeneratorError.swift in Sources */,
+				8489DFAA22C9988100591405 /* GenerateVideoAudioFromImages.swift in Sources */,
 				8458A42F229C31B2002904C6 /* VideoWriter.swift in Sources */,
 				8458A434229C31B2002904C6 /* Bundle+Helper.swift in Sources */,
 				8458A441229C31B2002904C6 /* AppDelegate.swift in Sources */,
